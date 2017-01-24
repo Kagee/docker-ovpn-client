@@ -1,0 +1,12 @@
+#! /bin/bash
+
+if [ -f /tmp/ovpn.pid ]; then 
+    echo ; 
+else 
+	OVPN_SERVER=$(cat /etc/openvpn/client.conf | awk '/^remote/ { print $2}')
+	mkdir -p /dev/net
+	if [ ! -c /dev/net/tun ]; then
+	    mknod /dev/net/tun c 10 200
+	fi
+	openvpn --daemon ovpn --writepid /tmp/ovpn.pid --log /tmp/ovpn.log --config /etc/openvpn/client.conf
+fi

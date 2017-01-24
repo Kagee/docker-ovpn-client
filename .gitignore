@@ -1,0 +1,6 @@
+*.crt
+*.conf
+*.key
+*.tar
+*.bak
+*.swp
